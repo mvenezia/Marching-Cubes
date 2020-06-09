@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using MarchingCubes.Config;
 
 // TODO Need func that will appropriately orient Nodes 0-8 in proper relation with each other before any calculations.
 // 		this func will likely be called externally as part of a dynamic calculation of voxels.
