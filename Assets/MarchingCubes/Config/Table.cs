@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
-namespace MarchingCubes
+namespace MarchingCubes.Config
 {
 	public static class Table
 	{
+		// Maps edge indices 0-11 to a pair of vertex indices 0-7, its endpoints
 		public static readonly Dictionary<int, int[]> EdgeToCorners = new Dictionary<int, int[]>()
 		{
 			{0, new [] {0, 1}},
@@ -22,13 +21,14 @@ namespace MarchingCubes
 			{11, new [] {3, 7}}
 		};
 
+		// Maps voxel case 0-255 to an array of edge indices 0-11
 		public static readonly int[][] TriTable = new int[256][]
 		{
 			new int[] {},
-			new [] {0, 8, 3},
-			new [] {0, 1, 9},
-			new [] {1, 8, 3, 9, 8, 1},
-			new [] {1, 2, 10},
+			new [] {3, 8, 0},
+			new [] {9, 1, 0}, 
+			new [] {1, 8, 9, 3, 8, 1},
+			new [] {10, 2, 1}, // last complete reversal
 			new [] {0, 8, 3, 1, 2, 10},
 			new [] {9, 2, 10, 0, 2, 9},
 			new [] {2, 8, 3, 2, 10, 8, 10, 9, 8, -1, -1, -1, -1, -1, -1, -1},
