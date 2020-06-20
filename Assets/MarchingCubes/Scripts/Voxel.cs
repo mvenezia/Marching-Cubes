@@ -19,9 +19,7 @@ namespace MarchingCubes
 		public void March()
 		{
 			CalculateVoxelCase();
-			
-			Debug.Log("_voxelCase..." + _voxelCase);
-			
+
 			CalculateMeshVertices();
 		}
 
