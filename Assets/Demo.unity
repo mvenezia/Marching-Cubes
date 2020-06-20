@@ -288,9 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51bac26853df87743b185bcd8f45fa50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  voxelPrefab: {fileID: 1893241242471162, guid: ea49346ecc2a74ce2883f857895d276f,
-    type: 2}
-  vertDebugPrefab: {fileID: 1107159710559352, guid: 769b781314e144160a76717df43826f4,
+  volumePrefab: {fileID: 1767633379670252, guid: 506136563b6e240f4848a13e9945e3c2,
     type: 2}
   _config: {fileID: 11400000, guid: a3ec73a50a9e08a48b0e7cb9a1eb5f53, type: 2}
 --- !u!4 &1704470607

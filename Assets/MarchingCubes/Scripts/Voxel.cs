@@ -1,21 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using MarchingCubes.Config;
-
-// TODO Need func that will appropriately orient Nodes 0-8 in proper relation with each other before any calculations.
-// 		this func will likely be called externally as part of a dynamic calculation of voxels.
 
 namespace MarchingCubes
 {
 	public class Voxel : MonoBehaviour
 	{
-		// Nodes MUST be stored in ASC order of vertex id as CalculateDensity
-		// assumes the node at _nodes[0] is vertex 0 and therefore has a relationship
-		// with certain edges.
-		[SerializeField] private Node[] _nodes = new Node[8];
+		private Node[] _nodes = new Node[8];
 		private int _voxelCase;
 		private List<Vector3> _vertices;
+
+		private void Awake()
+		{
+			InitializeNodes();
+		}
 
 		public void March()
 		{
@@ -46,12 +45,7 @@ namespace MarchingCubes
 				Vector3 intersectionPosition = (cornerPositionA + cornerPositionB) / 2;
 
 				MarchingCubesController.MeshVertices.Add(intersectionPosition);
-				
-				var vertDebug = Instantiate(MarchingCubesController.Instance.vertDebugPrefab);
-				vertDebug.transform.position = intersectionPosition;
-				vertDebug.transform.GetChild(0).gameObject.GetComponent<Text>().text =
-					(MarchingCubesController.MeshVertices.Count - 1).ToString();
-				
+
 				MarchingCubesController.MeshTriangles.Add(MarchingCubesController.MeshVertices.Count - 1);
 			}
 		}
@@ -77,6 +71,27 @@ namespace MarchingCubes
 			
 			float interpolant = (MarchingCubesController.Instance.Config.SurfaceLevel - belowSurface.density) / (aboveSurface.density - belowSurface.density);
 			return Vector3.Lerp(belowSurface.Position, aboveSurface.Position, interpolant);
+		}
+
+		private void InitializeNodes()
+		{
+			if (transform.childCount != 8)
+			{
+				Debug.LogError("There must be precisely 8 children (Nodes) to a voxel.");
+				return;
+			}
+			
+			for (int i = 0; i < 8; i++)
+			{
+				Node node = transform.GetChild(i).GetComponent<Node>();
+				if (node == null)
+				{
+					Debug.LogError("All children of a voxel must have a Node component.");
+					return;
+				}
+				
+				_nodes[i]= node;
+			}
 		}
 	}		
 }

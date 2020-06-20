@@ -6,8 +6,7 @@ namespace MarchingCubes
 {
 	public class MarchingCubesController : MonoBehaviour
 	{
-		public GameObject voxelPrefab;
-		public GameObject vertDebugPrefab;
+		public GameObject volumePrefab;
 		public MarchingCubesConfig Config { get { return _config; } }
 		[SerializeField] private MarchingCubesConfig _config;
 
@@ -52,25 +51,18 @@ namespace MarchingCubes
 			{
 				_instance = this;
 			}
+
+			InitializeVolume();
 		}
 
-		public void Start()
+		private void InitializeVolume()
 		{
-			var voxel = Instantiate(voxelPrefab).GetComponent<Voxel>();
-			var voxel2 = Instantiate(voxelPrefab).GetComponent<Voxel>();
-			var voxel3 = Instantiate(voxelPrefab).GetComponent<Voxel>();
-			voxel2.transform.position = new Vector3(0, 0, 1);
-			voxel3.transform.position = new Vector3(0, 0, 2);
-			
-			voxel.March();
-			voxel2.March();
-			voxel3.March();
-
+			var volume = Instantiate(volumePrefab).GetComponent<Volume>();
+			volume.March();
 			Mesh mesh = new Mesh();
-			GetComponent<MeshFilter>().mesh = mesh;
 			mesh.vertices = _meshVertices.ToArray();
 			mesh.triangles = _meshTriangles.ToArray();
-			mesh.RecalculateNormals();
+			GetComponent<MeshFilter>().mesh = mesh;
 		}
 	}
 }
