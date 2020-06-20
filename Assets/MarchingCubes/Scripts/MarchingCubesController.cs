@@ -31,7 +31,7 @@ namespace MarchingCubes
 			for (int i = 0; i < nodes.Length; i++)
 			{
 				var node = nodes[i];
-				node.density = node.X; // stub
+				node.density = DensityFunction(node.Position);
 				if (node.density <= _config.SurfaceLevel)
 				{
 					voxelCase |= 1 << i;
@@ -63,6 +63,11 @@ namespace MarchingCubes
 			mesh.vertices = _meshVertices.ToArray();
 			mesh.triangles = _meshTriangles.ToArray();
 			GetComponent<MeshFilter>().mesh = mesh;
+		}
+
+		private float DensityFunction(Vector3 nodePos)
+		{
+			return nodePos.y + nodePos.x;
 		}
 	}
 }

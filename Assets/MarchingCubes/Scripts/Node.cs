@@ -10,18 +10,15 @@ namespace MarchingCubes
 	public class Node : MonoBehaviour
 	{
 		[HideInInspector] public float density;
-		public float X { get { return transform.position.x; } }
-		public float Y { get { return transform.position.y; } }
-		public float Z { get { return transform.position.z; } }
 		public Vector3 Position  { get { return transform.position; } }
 
 		public bool IsBelowOrOnSurface
 		{
-			get { return isBelowOrOnSurface; }
-			set { isBelowOrOnSurface = value; if (value) debugSphere.materials[0].color = Color.black; }
+			get { return _isBelowOrOnSurface; }
+			set { _isBelowOrOnSurface = value; if (value) debugSphere.materials[0].color = Color.black; }
 		}
 
-		private bool isBelowOrOnSurface;
+		private bool _isBelowOrOnSurface;
 
 		[SerializeField] private MeshRenderer debugSphere;
 	}
