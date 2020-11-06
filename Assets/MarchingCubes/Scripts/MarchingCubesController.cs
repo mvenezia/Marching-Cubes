@@ -32,7 +32,7 @@ namespace MarchingCubes
 			{
 				var node = nodes[i];
 				node.density = DensityFunction(node.Position);
-				if (node.density <= _config.SurfaceLevel)
+				if (node.density >= _config.SurfaceLevel)
 				{
 					voxelCase |= 1 << i;
 					node.IsBelowOrOnSurface = true;
@@ -67,7 +67,7 @@ namespace MarchingCubes
 
 		private float DensityFunction(Vector3 nodePos)
 		{
-			return nodePos.y + nodePos.x;
+			return nodePos.y + 5 - nodePos.x;
 		}
 	}
 }

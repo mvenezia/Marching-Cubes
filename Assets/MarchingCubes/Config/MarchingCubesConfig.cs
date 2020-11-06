@@ -11,7 +11,7 @@ namespace MarchingCubes.Config
 		[SerializeField] private float _surfaceLevel;
 		
 		// Scalar value that describes the x, y, and z dimensions of 
-		//   the cubic volume within which voxels are marched.
+		// the cubic volume within which voxels are marched.
 		public int CubicDimension { get { return _cubicDimension; } }
 		[Tooltip("Scalar value that describes the x, y, and z dimensions of cubic volume within which voxels are marched")]
 		[SerializeField] private int _cubicDimension;
